@@ -1,0 +1,297 @@
+{
+	"info": {
+		"_postman_id": "d040dd1d-7965-46dc-a6d9-c504f651e9d5",
+		"name": "workshopFire",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Insert rooms",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"should have key mongo_id\", function () {",
+							"    pm.expect(jsonData.data).to.have.property('room_id');",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"room\" : \"1105\",\n    \"bed_size\" : \"queen size\",\n    \"cost\" : 1000,\n    \"status\" : \"Occupy\"\n}"
+				},
+				"url": {
+					"raw": "{{apiUrl}}/rooms",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"rooms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find rooms",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Should return data json 5 fields\", function () {",
+							"    pm.expect(Object.keys(jsonData.data[0]).length).to.eql(5);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}/rooms/",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"rooms",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find rooms sort by cost order by asc",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Should return data json 5 fields\", function () {",
+							"    pm.expect(Object.keys(jsonData.data[0]).length).to.eql(5);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}/rooms/?sort_by=cost&order=asc",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"rooms",
+						""
+					],
+					"query": [
+						{
+							"key": "sort_by",
+							"value": "cost"
+						},
+						{
+							"key": "order",
+							"value": "asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find rooms sort by cost order by desc",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Should return data json 5 fields\", function () {",
+							"    pm.expect(Object.keys(jsonData.data[0]).length).to.eql(5);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}/rooms/?sort_by=cost&order=desc",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"rooms",
+						""
+					],
+					"query": [
+						{
+							"key": "sort_by",
+							"value": "cost"
+						},
+						{
+							"key": "order",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update rooms",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"should have key mongo_id\", function () {",
+							"    pm.expect(jsonData.data).to.have.property('room_id');",
+							"})",
+							"",
+							"pm.test(\"should have key modified_count\", function () {",
+							"    pm.expect(jsonData.data).to.have.property('modified_count');",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cost\" : 1500\n}"
+				},
+				"url": {
+					"raw": "{{apiUrl}}/rooms/1105",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"rooms",
+						"1105"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find rooms by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Should return data json 5 fields\", function () {",
+							"    pm.expect(Object.keys(jsonData.data).length).to.eql(5);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}/rooms/1105",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"rooms",
+						"1105"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete rooms",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"should have key mongo_id\", function () {",
+							"    pm.expect(jsonData.data).to.have.property('room_id');",
+							"})",
+							"",
+							"pm.test(\"should have key deleted_count\", function () {",
+							"    pm.expect(jsonData.data).to.have.property('deleted_count');",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "var jsonData = pm.response.json();\n\npm.test(\"should have key mongo_id\", function () {\n    pm.expect(jsonData.data).to.have.property('room_id');\n})\n\npm.test(\"should have key modified_count\", function () {\n    pm.expect(jsonData.data).to.have.property('deleted_count');\n})"
+				},
+				"url": {
+					"raw": "{{apiUrl}}/rooms/1101",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"rooms",
+						"1101"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
