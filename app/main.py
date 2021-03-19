@@ -48,7 +48,7 @@ def get_rooms(
         raise HTTPException(status_code=500, detail="Something went wrong !!")
 
     return JSONResponse(
-        content={"status": "OK", "data": result},
+        content={"data": result},
         status_code=200,
     )
 
@@ -62,7 +62,6 @@ def create_rooms(room: createRoomModel):
 
     return JSONResponse(
         content={
-            "status": "ok",
             "data": {
                 "room_id": room_id,
             },
@@ -82,7 +81,7 @@ def get_students_by_id(room_id: str = Path(None, min_length=4, max_length=4)):
         raise HTTPException(status_code=404, detail="Student Id not found !!")
 
     return JSONResponse(
-        content={"status": "OK", "data": result},
+        content={"data": result},
         status_code=200,
     )
 
