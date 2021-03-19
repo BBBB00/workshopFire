@@ -1,7 +1,0 @@
-Example Data
-{
-    "room" : "1101",
-    "bed_size" : "king size",
-    "cost" : 500,
-    "status" : "available"
-}
